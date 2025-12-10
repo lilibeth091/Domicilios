@@ -1,0 +1,7 @@
+Guardianes 
+Va avalidar si el ussuario tiene una sesion activa lo deja pasar y si no se rechaza
+ng g guard guards/authentication --- para verificar que el suusario esta autenticado 
+
+
+
+Hay que creear guardianes para los roles. 
