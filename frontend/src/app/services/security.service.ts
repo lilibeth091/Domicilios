@@ -4,6 +4,8 @@ import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,12 @@ export class SecurityService {
   //Patron de diseño Observer - programacion fina, no lo hace la IA - 28 recomendaciones 
   //BehaviorSubject - Desde cual parte de la aplicación se puede acceder a la información del usuario es como un Obsever 
   theUser = new BehaviorSubject<User>(new User);
-  constructor(private http: HttpClient) { 
-    this.verifyActualSession() //
+  
+  constructor(
+    private http: HttpClient,
+    private afAuth: AngularFireAuth
+  ) { 
+    this.verifyActualSession();
   }
 
   /**
@@ -26,6 +32,38 @@ export class SecurityService {
   login(user: User): Observable<any> {
     return this.http.post<any>(`${environment.url_ms_security}/login`, user);
   }
+
+  /**
+   * Inicia sesión con Google usando Firebase
+   * @returns Promise con el resultado de la autenticación
+   */
+  async loginWithGoogle(): Promise<any> {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const result = await this.afAuth.signInWithPopup(provider);
+      
+      if (result.user) {
+        // Construir el objeto de usuario con los datos de Google
+        const googleUser = {
+          id: result.user.uid,
+          name: result.user.displayName || '',
+          email: result.user.email || '',
+          token: await result.user.getIdToken()
+        };
+        
+        // Guardar la sesión
+        this.saveSession(googleUser);
+        
+        return { success: true, user: googleUser };
+      }
+      
+      return { success: false, error: 'No se pudo obtener información del usuario' };
+    } catch (error) {
+      console.error('Error en login con Google:', error);
+      return { success: false, error };
+    }
+  }
+
   /*
   Guardar la información de usuario en el - local storage - 
   */
@@ -40,6 +78,7 @@ export class SecurityService {
     localStorage.setItem('sesion', JSON.stringify(data));
     this.setUser(data); // Variable global reactiva 
   }
+  
   /**
     * Permite actualizar la información del usuario
     * que acabó de validarse correctamente
@@ -48,6 +87,7 @@ export class SecurityService {
   setUser(user: User) {
     this.theUser.next(user); //Next = publisher - propio del behaviorSubject - Todos los que esten pendientes de mi digales que cambie 
   }
+  
   /**
   * Permite obtener la información del usuario
   * con datos tales como el identificador y el token
@@ -56,6 +96,7 @@ export class SecurityService {
   getUser() {
     return this.theUser.asObservable();
   }
+  
   /**
     * Permite obtener la información de usuario
     * que tiene la función activa y servirá
@@ -70,10 +111,12 @@ export class SecurityService {
   * Permite cerrar la sesión del usuario
   * que estaba previamente logueado
   */
-  logout() {
+  async logout() {
+    await this.afAuth.signOut(); // Cerrar sesión en Firebase también
     localStorage.removeItem('sesion');
     this.setUser(new User());
   }
+  
   /**
   * Permite verificar si actualmente en el local storage
   * existe información de un usuario previamente logueado
@@ -84,6 +127,7 @@ export class SecurityService {
       this.setUser(JSON.parse(actualSesion)); //Al usuario que se logueo actualicele la informacion  - si esta linea no esta cuando el usuario salga sin cerrar sesion despues cuando vuelva a entrar no le va a funcionar 
     }
   }
+  
   /**
   * Verifica si hay una sesion activa en el local storage
   * @returns
@@ -92,6 +136,7 @@ export class SecurityService {
     let sesionActual = this.getSessionData();
     return (sesionActual) ? true : false;
   }
+  
   /**
   * Permite obtener los dato de la sesión activa en el
   * local storage
@@ -102,7 +147,6 @@ export class SecurityService {
     return sesionActual;
   }
 }
-
 
 
 //Hacer el logout en el sidebar y navbar

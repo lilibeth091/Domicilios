@@ -8,7 +8,17 @@ export const environment = {
   production: false,
   url_backend:'https://44202382-5f5c-43c5-a919-7bc16c69c1ef.mock.pstmn.io',
   url_ms_security:'https://db0ee2e7-2a77-41be-b95f-cdc534d6fc8e.mock.pstmn.io',
-  url_web_socket:'https://0.0.0.0:5000'
+  url_web_socket:'https://0.0.0.0:5000',
+  
+  // Firebase configuration
+  firebase: {
+    apiKey: "AIzaSyAQ9FLfBfEHMu2QPx46QN4qJkBC83aM6Ng",
+    authDomain: "seguridad-76e9a.firebaseapp.com",
+    projectId: "seguridad-76e9a",
+    storageBucket: "seguridad-76e9a.firebasestorage.app",
+    messagingSenderId: "992312297540",
+    appId: "1:992312297540:web:1e79876c13105028dc9411"
+  }
 };
 
 /*

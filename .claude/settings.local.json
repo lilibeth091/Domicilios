@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\Users\\Lilibeth\\Desktop\\frontend\\Domicilios\\frontend\\src\\app\\pages\\restaurante\" /b)",
+      "Bash(cat:*)",
+      "Bash(npm run build:*)",
+      "Bash(timeout 30 npm start:*)",
+      "Bash(npx ng build:*)"
+    ]
+  }
+}
