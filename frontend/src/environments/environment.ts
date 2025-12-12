@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  url_backend:'http://127.0.0.1:5000',
-  url_ms_security:'https://db0ee2e7-2a77-41be-b95f-cdc534d6fc8e.mock.pstmn.io',
-  url_web_socket:'https://0.0.0.0:5000',
+  url_backend: 'http://127.0.0.1:5000',
+  url_ms_security: 'https://db0ee2e7-2a77-41be-b95f-cdc534d6fc8e.mock.pstmn.io',
+  // Cambiado para que apunte correctamente al backend
+  url_web_socket: 'http://127.0.0.1:5000',
   
   // Firebase configuration
   firebase: {
