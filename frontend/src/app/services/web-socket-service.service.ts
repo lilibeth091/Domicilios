@@ -1,38 +1,50 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment';
-import { SecurityService } from './security.service';
-
+import { EventEmitter, Injectable, NgZone } from "@angular/core";
+import { io, Socket } from "socket.io-client";
+import { environment } from "src/environments/environment";
+import { SecurityService } from "./security.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-export class WebSocketService extends Socket {
+export class WebSocketService {
+  private socket!: Socket;
   callback: EventEmitter<any> = new EventEmitter();
-  nameEvent: string;
-  constructor(private securityService: SecurityService) {
-    const userId = securityService.activeUserSession?.email || ''; // Asegúrate de que no sea nulo
-    super({
-      url: environment.url_web_socket,
-      options: {
-        query: {
-          "user_id": userId
-        }
-      }
-    })
-    this.nameEvent = ""
-    //this.listen()
+  nameEvent: string = "";
+
+  constructor(
+    private securityService: SecurityService,
+    private ngZone: NgZone
+  ) {
+    const userId = securityService.activeUserSession?.email || ""; // Asegúrate de que no sea nulo
+    this.socket = io(environment.url_web_socket, {
+      query: {
+        user_id: userId,
+      },
+    });
   }
+
   setNameEvent(nameEvent: string) {
-    this.nameEvent = nameEvent
-    this.listen()
+    this.nameEvent = nameEvent;
+    this.listen();
   }
-  listen = () => {
-    this.ioSocket.on(this.nameEvent, (res: any) => this.callback.emit(res))
+
+  private listen() {
+    this.socket.on(this.nameEvent, (res: any) => {
+      // asegurar que la emisión suceda dentro del zone de Angular
+      this.ngZone.run(() => this.callback.emit(res));
+    });
   }
-  // Para llamar este método es necesario inyectar el servicio
-  // y enviar el payload
-  // emitEvent=(payload={})=>{
-  //   this.ioSocket.emit(this.nameEvent,payload)
-  // }
+
+  emitEvent(payload: any = {}) {
+    if (!this.nameEvent) return;
+    this.socket.emit(this.nameEvent, payload);
+  }
+
+  disconnect() {
+    try {
+      this.socket.disconnect();
+    } catch (e) {
+      // ignore
+    }
+  }
 }

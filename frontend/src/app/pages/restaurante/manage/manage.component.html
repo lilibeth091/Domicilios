@@ -1,88 +1,192 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-</div>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
 <!-- Page content -->
 <div class="container-fluid mt--7">
-    <!-- Table -->
-    <div class="row">
-        <div class="col">
-            <div class="card shadow">
-                <div class="card-header bg-transparent">
-                    <h3 class="mb-0" *ngIf="mode==1">Detalle</h3>
-                    <h3 class="mb-0" *ngIf="mode==2">Crear Restaurante</h3>
-                    <h3 class="mb-0" *ngIf="mode==3">Actualizar Restaurante</h3>
-                </div>
-                <div class="card-body">
-                    <form class="form" [formGroup]="theFormGroup">
-                        <div class="card-body container">
-                            <div class="row">
-                                <div class="col-3">ID</div>
-                                <div class="col-9">
-                                    <input type="text" class="form-control" formControlName="id" disabled>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-3">Nombre</div>
-                                <div class="col-9">
-                                    <input type="text" class="form-control" [disabled]="mode==1" formControlName="nombre">
-
-                                    <div *ngIf="getTheFormGroup.nombre.errors && (getTheFormGroup.nombre.dirty || getTheFormGroup.nombre.touched || trySend)">
-                                        <strong *ngIf="getTheFormGroup.nombre.errors.required" class="msnError">Requerido</strong>
-                                        <strong *ngIf="getTheFormGroup.nombre.errors.minlength" class="msnError">Mínimo 3 caracteres</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-3">Dirección</div>
-                                <div class="col-9">
-                                    <input type="text" class="form-control" [disabled]="mode==1" formControlName="direccion">
-
-                                    <div *ngIf="getTheFormGroup.direccion.errors && (getTheFormGroup.direccion.dirty || getTheFormGroup.direccion.touched || trySend)">
-                                        <strong *ngIf="getTheFormGroup.direccion.errors.required" class="msnError">Requerido</strong>
-                                        <strong *ngIf="getTheFormGroup.direccion.errors.minlength" class="msnError">Mínimo 5 caracteres</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-3">Teléfono</div>
-                                <div class="col-9">
-                                    <input type="text" class="form-control" [disabled]="mode==1" formControlName="telefono">
-
-                                    <div *ngIf="getTheFormGroup.telefono.errors && (getTheFormGroup.telefono.dirty || getTheFormGroup.telefono.touched || trySend)">
-                                        <strong *ngIf="getTheFormGroup.telefono.errors.required" class="msnError">Requerido</strong>
-                                        <strong *ngIf="getTheFormGroup.telefono.errors.pattern" class="msnError">Debe ser un número de 7 a 10 dígitos</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-3">Correo</div>
-                                <div class="col-9">
-                                    <input type="number" class="form-control" [disabled]="mode==1" formControlName="capacidad">
-
-                                    <div *ngIf="getTheFormGroup.capacidad.errors && (getTheFormGroup.capacidad.dirty || getTheFormGroup.capacidad.touched || trySend)">
-                                        <strong *ngIf="getTheFormGroup.capacidad.errors.min" class="msnError">Valor mínimo debe ser 1</strong>
-                                        <strong *ngIf="getTheFormGroup.capacidad.errors.max" class="msnError">Valor máximo 500</strong>
-                                        <strong *ngIf="getTheFormGroup.capacidad.errors.required" class="msnError">Requerido</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-3"></div>
-                                <div class="col-9">
-                                    <button type="button" class="btn btn-primary btn-block" (click)="back()" *ngIf="mode==1">Regresar</button>
-                                    <button type="button" class="btn btn-success btn-block" (click)="create()" *ngIf="mode==2">Crear</button>
-                                    <button type="button" class="btn btn-warning btn-block" (click)="update()" *ngIf="mode==3">Actualizar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0" *ngIf="mode == 1">Detalle</h3>
+          <h3 class="mb-0" *ngIf="mode == 2">Crear Restaurante</h3>
+          <h3 class="mb-0" *ngIf="mode == 3">Actualizar Restaurante</h3>
         </div>
+        <div class="card-body">
+          <form class="form" [formGroup]="theFormGroup">
+            <div class="card-body container">
+              <div class="row">
+                <div class="col-3">ID</div>
+                <div class="col-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="id"
+                    disabled
+                  />
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-3">Nombre</div>
+                <div class="col-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [disabled]="mode == 1"
+                    formControlName="nombre"
+                  />
+
+                  <div
+                    *ngIf="
+                      getTheFormGroup.nombre.errors &&
+                      (getTheFormGroup.nombre.dirty ||
+                        getTheFormGroup.nombre.touched ||
+                        trySend)
+                    "
+                  >
+                    <strong
+                      *ngIf="getTheFormGroup.nombre.errors.required"
+                      class="msnError"
+                      >Requerido</strong
+                    >
+                    <strong
+                      *ngIf="getTheFormGroup.nombre.errors.minlength"
+                      class="msnError"
+                      >Mínimo 3 caracteres</strong
+                    >
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-3">Dirección</div>
+                <div class="col-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [disabled]="mode == 1"
+                    formControlName="direccion"
+                  />
+
+                  <div
+                    *ngIf="
+                      getTheFormGroup.direccion.errors &&
+                      (getTheFormGroup.direccion.dirty ||
+                        getTheFormGroup.direccion.touched ||
+                        trySend)
+                    "
+                  >
+                    <strong
+                      *ngIf="getTheFormGroup.direccion.errors.required"
+                      class="msnError"
+                      >Requerido</strong
+                    >
+                    <strong
+                      *ngIf="getTheFormGroup.direccion.errors.minlength"
+                      class="msnError"
+                      >Mínimo 5 caracteres</strong
+                    >
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-3">Teléfono</div>
+                <div class="col-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [disabled]="mode == 1"
+                    formControlName="telefono"
+                  />
+
+                  <div
+                    *ngIf="
+                      getTheFormGroup.telefono.errors &&
+                      (getTheFormGroup.telefono.dirty ||
+                        getTheFormGroup.telefono.touched ||
+                        trySend)
+                    "
+                  >
+                    <strong
+                      *ngIf="getTheFormGroup.telefono.errors.required"
+                      class="msnError"
+                      >Requerido</strong
+                    >
+                    <strong
+                      *ngIf="getTheFormGroup.telefono.errors.pattern"
+                      class="msnError"
+                      >Debe ser un número de 7 a 10 dígitos</strong
+                    >
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-3">Correo</div>
+                <div class="col-9">
+                  <input
+                    type="email"
+                    class="form-control"
+                    [disabled]="mode == 1"
+                    formControlName="email"
+                  />
+
+                  <div
+                    *ngIf="
+                      getTheFormGroup.email.errors &&
+                      (getTheFormGroup.email.dirty ||
+                        getTheFormGroup.email.touched ||
+                        trySend)
+                    "
+                  >
+                    <strong
+                      *ngIf="getTheFormGroup.email.errors.required"
+                      class="msnError"
+                      >Requerido</strong
+                    >
+                    <strong
+                      *ngIf="getTheFormGroup.email.errors.email"
+                      class="msnError"
+                      >Formato de correo inválido</strong
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3"></div>
+                <div class="col-9">
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-block"
+                    (click)="back()"
+                    *ngIf="mode == 1"
+                  >
+                    Regresar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-success btn-block"
+                    (click)="create()"
+                    *ngIf="mode == 2"
+                  >
+                    Crear
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning btn-block"
+                    (click)="update()"
+                    *ngIf="mode == 3"
+                  >
+                    Actualizar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <!-- La directiva NgIf - reactiva - Funciona como un condicional
      Definir la etiqueta formGroup - Policía. Llama al formgroup del controlador
