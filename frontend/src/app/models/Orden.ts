@@ -4,6 +4,6 @@ export class Orden {
     menu_id?: number;
     motorcycle_id?: number;
     quantity?: number;
-    total_price?: GLfloat;
+    total_price?: number;
     status?: string;
 }

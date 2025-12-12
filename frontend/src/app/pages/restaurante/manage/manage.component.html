@@ -58,14 +58,13 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-3">Correo</div>
+                                <div class="col-3">Email</div>
                                 <div class="col-9">
-                                    <input type="number" class="form-control" [disabled]="mode==1" formControlName="capacidad">
+                                    <input type="email" class="form-control" [disabled]="mode==1" formControlName="email">
 
-                                    <div *ngIf="getTheFormGroup.capacidad.errors && (getTheFormGroup.capacidad.dirty || getTheFormGroup.capacidad.touched || trySend)">
-                                        <strong *ngIf="getTheFormGroup.capacidad.errors.min" class="msnError">Valor mínimo debe ser 1</strong>
-                                        <strong *ngIf="getTheFormGroup.capacidad.errors.max" class="msnError">Valor máximo 500</strong>
-                                        <strong *ngIf="getTheFormGroup.capacidad.errors.required" class="msnError">Requerido</strong>
+                                    <div *ngIf="getTheFormGroup.email.errors && (getTheFormGroup.email.dirty || getTheFormGroup.email.touched || trySend)">
+                                        <strong *ngIf="getTheFormGroup.email.errors.required" class="msnError">Requerido</strong>
+                                        <strong *ngIf="getTheFormGroup.email.errors.email" class="msnError">Debe ser un email válido</strong>
                                     </div>
                                 </div>
                             </div>

@@ -49,7 +49,7 @@ export class ManageComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       direccion: ['', [Validators.required, Validators.minLength(5)]],
       telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{7,10}$/)]],
-      capacidad: ['', [Validators.required, Validators.min(1), Validators.max(500)]]
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -65,7 +65,7 @@ export class ManageComponent implements OnInit {
         nombre: this.restaurante.name,
         direccion: this.restaurante.address,
         telefono: this.restaurante.phone,
-        capacidad: this.restaurante.email
+        email: this.restaurante.email
       });
     });
   }
@@ -84,7 +84,7 @@ export class ManageComponent implements OnInit {
       name: this.theFormGroup.get('nombre')?.value,
       address: this.theFormGroup.get('direccion')?.value,
       phone: this.theFormGroup.get('telefono')?.value,
-      email: this.theFormGroup.get('capacidad')?.value
+      email: this.theFormGroup.get('email')?.value
     };
     this.restauranteService.create(newRestaurante).subscribe({
       next: (data) => {
@@ -120,7 +120,7 @@ export class ManageComponent implements OnInit {
       name: this.theFormGroup.get('nombre')?.value,
       address: this.theFormGroup.get('direccion')?.value,
       phone: this.theFormGroup.get('telefono')?.value,
-      email: this.theFormGroup.get('capacidad')?.value
+      email: this.theFormGroup.get('email')?.value
     };
     this.restauranteService.update(updatedRestaurante).subscribe({
       next: (data) => {

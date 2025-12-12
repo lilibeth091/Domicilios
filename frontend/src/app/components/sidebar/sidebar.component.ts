@@ -11,15 +11,15 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-    { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
-    { path: '/restaurante/list', title: 'Restaurante',  icon:'ni-shop text-red', class: '' },
-    { path: '/producto/list', title: 'Producto',  icon:'ni-basket text-blue', class: '' },
+    { path: '/dashboard', title: 'Panel',  icon: 'ni-tv-2 text-primary', class: '' },
+    { path: '/maps', title: 'Mapas',  icon:'ni-pin-3 text-orange', class: '' },
+    { path: '/cliente/list', title: 'Clientes',  icon:'ni-single-02 text-yellow', class: '' },
     { path: '/menu/list', title: 'Menu',  icon:'ni-book-bookmark text-green', class: '' },
-    { path: '/cliente/list', title: 'Cliente',  icon:'ni-single-02 text-yellow', class: '' },
-    { path: '/orden/list', title: 'Orden',  icon:'ni-cart text-purple', class: '' },
     { path: '/moto/list', title: 'Moto',  icon:'ni-delivery-fast text-pink', class: '' },
-    { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' }
+    { path: '/orden/list', title: 'Orden',  icon:'ni-cart text-purple', class: '' },
+    { path: '/producto/list', title: 'Producto',  icon:'ni-basket text-blue', class: '' },
+    { path: '/restaurante/list', title: 'Restaurante',  icon:'ni-shop text-red', class: '' },
+    { path: '/login', title: 'Acceso',  icon:'ni-key-25 text-info', class: '' }
 ];
 
 @Component({
