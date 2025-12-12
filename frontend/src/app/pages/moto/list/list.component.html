@@ -1,1 +1,69 @@
-<p>list works!</p>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Motos</h3>
+            </div>
+            <div class="col text-right">
+              <button
+                class="btn btn-success btn-sm"
+                [routerLink]="['/moto/create']"
+              >
+                <i class="fas fa-plus"></i> Crear Moto
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th>ID</th>
+                  <th>License Plate</th>
+                  <th>Brand</th>
+                  <th>Year</th>
+                  <th>Status</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let moto of motos">
+                  <td>{{ moto.id }}</td>
+                  <td>{{ moto.license_plate }}</td>
+                  <td>{{ moto.brand }}</td>
+                  <td>{{ moto.year }}</td>
+                  <td>{{ moto.status }}</td>
+                  <td>
+                    <button
+                      class="btn btn-info btn-sm mr-2"
+                      [routerLink]="['/moto/view', moto.id]"
+                    >
+                      Ver
+                    </button>
+                    <button
+                      class="btn btn-warning btn-sm mr-2"
+                      [routerLink]="['/moto/update', moto.id]"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="delete(moto.id)"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

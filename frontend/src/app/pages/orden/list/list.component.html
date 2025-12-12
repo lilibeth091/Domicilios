@@ -1,1 +1,73 @@
-<p>list works!</p>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Órdenes</h3>
+            </div>
+            <div class="col text-right">
+              <button
+                class="btn btn-success btn-sm"
+                [routerLink]="['/orden/create']"
+              >
+                <i class="fas fa-plus"></i> Crear Orden
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th>ID</th>
+                  <th>Customer ID</th>
+                  <th>Menu ID</th>
+                  <th>Motorcycle ID</th>
+                  <th>Quantity</th>
+                  <th>Total Price</th>
+                  <th>Status</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let orden of ordenes">
+                  <td>{{ orden.id }}</td>
+                  <td>{{ orden.customer_id }}</td>
+                  <td>{{ orden.menu_id }}</td>
+                  <td>{{ orden.motorcycle_id }}</td>
+                  <td>{{ orden.quantity }}</td>
+                  <td>{{ orden.total_price }}</td>
+                  <td>{{ orden.status }}</td>
+                  <td>
+                    <button
+                      class="btn btn-info btn-sm mr-2"
+                      [routerLink]="['/orden/view', orden.id]"
+                    >
+                      Ver
+                    </button>
+                    <button
+                      class="btn btn-warning btn-sm mr-2"
+                      [routerLink]="['/orden/update', orden.id]"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="delete(orden.id)"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

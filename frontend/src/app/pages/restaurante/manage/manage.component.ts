@@ -45,14 +45,11 @@ export class ManageComponent implements OnInit {
 
   configFormGroup() {
     this.theFormGroup = this.theFormBuilder.group({
-      id: [{ value: "", disabled: true }],
-      nombre: ["", [Validators.required, Validators.minLength(3)]],
-      direccion: ["", [Validators.required, Validators.minLength(5)]],
-      telefono: [
-        "",
-        [Validators.required, Validators.pattern(/^[0-9]{7,10}$/)],
-      ],
-      email: ["", [Validators.required, Validators.email]],
+      id: [{ value: '', disabled: true }],
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      direccion: ['', [Validators.required, Validators.minLength(5)]],
+      telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{7,10}$/)]],
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -68,7 +65,7 @@ export class ManageComponent implements OnInit {
         nombre: this.restaurante.name,
         direccion: this.restaurante.address,
         telefono: this.restaurante.phone,
-        email: this.restaurante.email,
+        capacidad: this.restaurante.email
       });
     });
   }
@@ -84,10 +81,10 @@ export class ManageComponent implements OnInit {
       return;
     }
     const newRestaurante: Restaurante = {
-      name: this.theFormGroup.get("nombre")?.value,
-      address: this.theFormGroup.get("direccion")?.value,
-      phone: this.theFormGroup.get("telefono")?.value,
-      email: this.theFormGroup.get("email")?.value,
+      name: this.theFormGroup.get('nombre')?.value,
+      address: this.theFormGroup.get('direccion')?.value,
+      phone: this.theFormGroup.get('telefono')?.value,
+      email: this.theFormGroup.get('capacidad')?.value
     };
     this.restauranteService.create(newRestaurante).subscribe({
       next: (data) => {
@@ -120,10 +117,10 @@ export class ManageComponent implements OnInit {
     }
     const updatedRestaurante: Restaurante = {
       id: this.restaurante.id,
-      name: this.theFormGroup.get("nombre")?.value,
-      address: this.theFormGroup.get("direccion")?.value,
-      phone: this.theFormGroup.get("telefono")?.value,
-      email: this.theFormGroup.get("email")?.value,
+      name: this.theFormGroup.get('nombre')?.value,
+      address: this.theFormGroup.get('direccion')?.value,
+      phone: this.theFormGroup.get('telefono')?.value,
+      email: this.theFormGroup.get('capacidad')?.value
     };
     this.restauranteService.update(updatedRestaurante).subscribe({
       next: (data) => {

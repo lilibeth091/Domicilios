@@ -2,8 +2,6 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { url } from "inspector";
-
 export const environment = {
   production: false,
   url_backend:'https://44202382-5f5c-43c5-a919-7bc16c69c1ef.mock.pstmn.io',
