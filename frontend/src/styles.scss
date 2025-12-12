@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+/* Forzar estilo de cabecera / navbar en rojo (degradado) similar al diseño Argon */
+.header.bg-gradient-danger,
+.navbar.navbar-top {
+	background-image: linear-gradient(87deg, #f5365c 0%, #fb6340 100%) !important;
+	color: #fff !important;
+}
+
+.header.bg-gradient-danger .header-body,
+.navbar.navbar-top .container-fluid {
+	color: #fff;
+}
+
+/* Ajustes para que el header tenga altura visible */
+.header {
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+}
+
+/* Si el navbar usa fondo transparente, forzamos que sea opaco */
+.navbar-top.navbar-dark {
+	background-color: transparent;
+}
+
+/* Mejor contraste para títulos */
+.header .h2, .header h2, .navbar .h4 {
+	color: #fff;
+}
