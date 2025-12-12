@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
 import { MapsComponent } from "../../pages/maps/maps.component";
+import { ReportsComponent } from "src/app/pages/reports/reports.component";
 import { AuthenticationGuard } from "src/app/guards/authentication.guard";
 
 export const AdminLayoutRoutes: Routes = [
@@ -9,6 +10,10 @@ export const AdminLayoutRoutes: Routes = [
     path: "dashboard",
     canActivate: [AuthenticationGuard],
     component: DashboardComponent,
+  },
+  {
+    path: "reports",
+    component: ReportsComponent,
   },
   {
     path: "maps",

@@ -1,0 +1,46 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row">
+        <div class="col">
+          <h6 class="text-uppercase text-white ls-1 mb-1">Informes</h6>
+          <h2 class="text-white mb-0">Gráficos e Informes Visuales</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7 mt-4">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let i of [1, 2, 3]">
+      <div class="card mb-3">
+        <div class="card-header">Pie {{ i }}</div>
+        <div class="card-body">
+          <canvas id="pie{{ i }}" class="chart-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let i of [1, 2, 3]">
+      <div class="card mb-3">
+        <div class="card-header">Bar {{ i }}</div>
+        <div class="card-body">
+          <canvas id="bar{{ i }}" class="chart-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let i of [1, 2, 3]">
+      <div class="card mb-3">
+        <div class="card-header">Series {{ i }}</div>
+        <div class="card-body">
+          <canvas id="line{{ i }}" class="chart-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
